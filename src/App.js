@@ -10,7 +10,7 @@ function App() {
   // per accedere al reducer servono le action
   const counter = useSelector((state) => state.counter);
   const loggedIn = useSelector((state) => state.isLogged);
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((state) => state.users);
   const loading = useSelector((state) => state.users.loading);
   const dispatch = useDispatch();
 
@@ -32,7 +32,11 @@ function App() {
       <br></br>
 
       <b>Esempio di fetching API con saga</b>
-      {loading ? null : users.map((u) => <p>{u.name}</p>)}
+      {loading
+        ? null
+        : typeof users.users != "undefined"
+        ? users.users.map((u) => <p>{u.name}</p>)
+        : null}
 
       <br></br>
       <br></br>
